@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- Names: Sergey Bunin,Jaskaran Sahni -->
+<!-- Date: February 18th, 2024 -->
+<!--Description: A group submission for Assignment 1-->
+<!--Class: 24W Client-Side JavaScript - 01-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story Creator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+  }
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+<h1>Story Creator</h1>
+<div class="container">
+  <div>
+    <button id="nounButton">Noun</button>
+    <span id="selectedNoun"></span>
+  </div>
+  <div>
+    <button id="verbButton">Verb</button>
+    <span id="selectedVerb"></span>
+  </div>
+  <div>
+    <button id="adjectiveButton">Adjective</button>
+    <span id="selectedAdjective"></span>
+  </div>
+  <div>
+    <button id="adverbButton">Adverb</button>
+    <span id="selectedAdverb"></span>
+  </div>
+  <div>
+    <button id="prepositionButton">Preposition</button>
+    <span id="selectedPreposition"></span>
+  </div>
+  <button id="showStoryButton">Show Story</button>
+  <p id="story"></p>
+</div>
+<script>
+  const nouns = ['cat', 'dog', 'bird', 'tree', 'house'];
+  const verbs = ['runs', 'jumps', 'flies', 'swims', 'sings'];
+  const adjectives = ['happy', 'sad', 'tall', 'short', 'beautiful'];
+  const adverbs = ['quickly', 'slowly', 'happily', 'sadly', 'carefully'];
+  const prepositions = ['on', 'in', 'under', 'over', 'beside'];
+
+  const selectedWords = {
+    noun: '',
+    verb: '',
+    adjective: '',
+    adverb: '',
+    preposition: ''
+  };
+
+  function updateButton(buttonId, spanId, wordType) {
+    const button = document.getElementById(buttonId);
+    const span = document.getElementById(spanId);
+    button.addEventListener('click', () => {
+      const randomIndex = Math.floor(Math.random() * 5);
+      selectedWords[wordType] = eval(wordType + 's')[randomIndex];
+      span.textContent = selectedWords[wordType];
+    });
+  }
+
+  updateButton('nounButton', 'selectedNoun', 'noun');
+  updateButton('verbButton', 'selectedVerb', 'verb');
+  updateButton('adjectiveButton', 'selectedAdjective', 'adjective');
+  updateButton('adverbButton', 'selectedAdverb', 'adverb');
+  updateButton('prepositionButton', 'selectedPreposition', 'preposition');
+
+  document.getElementById('showStoryButton').addEventListener('click', () => {
+    const { noun, verb, adjective, adverb, preposition } = selectedWords;
+    const story = `${adverb} ${verb} ${preposition} the ${adjective} ${noun}.`;
+    document.getElementById('story').textContent = story;
+  });
+</script>
+</body>
+</html>
